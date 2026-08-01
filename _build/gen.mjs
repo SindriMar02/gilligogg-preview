@@ -296,7 +296,7 @@ const html = `<!doctype html>
           <span class="quote__src mono">MORGUNBLAÐIÐ &middot; 8 SEPT 1965</span>
         </footer>
       </blockquote>
-      <p class="thesis__gloss">The bar opened on Austurstræti in ${D.biz.opened}, took the painter's word for a name, and hung the walls with four large oil paintings by <em>Þrándur Þórarinsson</em> — Reykjavík as it looked early last century, crowded with faces from the city's cultural life, then and now.</p>
+      <p class="thesis__gloss">The bar opened on Austurstræti in ${D.biz.opened}, took the painter's word for a name, and hung the walls with four large oil paintings by <em>Þrándur Þórarinsson</em>. Reykjavík as it looked early last century, crowded with faces from the city's cultural life, then and now.</p>
     </div>
 
     <ul class="facts">
@@ -343,7 +343,7 @@ ${classicsBlock}
   <header class="sec-head">
     <p class="kicker mono">04 / ON THE WALLS</p>
     <h2 class="h2">A Reykjavík<br /><em>that never existed</em></h2>
-    <p class="sec-head__note">Þrándur Þórarinsson, born in Akureyri in 1978, paints the way the old masters painted and puts the city in the frame — crowds, horses, statues, and faces you half recognise.</p>
+    <p class="sec-head__note">Þrándur Þórarinsson, born in Akureyri in 1978, paints the way the old masters painted and puts the city in the frame: crowds, horses, statues, and faces you half recognise.</p>
   </header>
 
 ${fig('painting', 'PAINTED PANEL ABOVE THE BANQUETTE', 'bleed--wide')}
