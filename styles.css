@@ -143,14 +143,14 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 }
 .gate__liquid{position:absolute;inset:0;width:100%;height:100%}
 #gateWave{opacity:.92}
-.gate__inner{position:relative;z-index:2;display:grid;justify-items:center;gap:clamp(16px,2.4vw,26px)}
-.gate__logo{
-  width:min(72vw,620px);height:auto;
-  /* the wordmark is knocked out of whatever is behind it, so the rising
-     liquid reads as filling the letters rather than sliding under them */
-  mix-blend-mode:difference;
-}
-.gate__line{color:var(--bronze-lift);letter-spacing:.42em}
+.gate__stage{position:relative;z-index:2;padding:0 var(--pad)}
+/* Knocked out of whatever is behind it, so the rising liquid reads as filling
+   the letters rather than sliding under them. The drop-shadow the shared rule
+   gives the hero mark is dropped here, because a shadow under a difference
+   blend prints as a grey halo. Once the liquid has drained, difference against
+   the near-black ground returns the mark to its normal light colour, which is
+   what the hero's copy underneath is already showing. */
+.gate__logo{mix-blend-mode:difference;filter:none}
 .gate__count{
   position:absolute;z-index:2;bottom:clamp(20px,4vh,44px);left:var(--pad);
   font-size:clamp(2.4rem,7vw,5rem);letter-spacing:-.02em;color:var(--ink);
@@ -292,42 +292,56 @@ body.gate-on{overflow:hidden}
   position:absolute;inset:0;z-index:-1;pointer-events:none;opacity:0;
   background:rgba(5,9,6,.92);
 }
+/* The h1 is the ONLY thing in normal flow here, and it is dead-centred, so it
+   lands on exactly the same pixels as the gate's stage. Everything else is
+   absolutely positioned specifically so it cannot nudge the wordmark off
+   centre when it fades in — that nudge is what would break the handover. */
 .hero__content{
   position:absolute;inset:0;
-  display:flex;flex-direction:column;align-items:center;
-  padding:clamp(84px,11svh,120px) var(--pad) clamp(20px,3.4svh,34px);
+  display:grid;place-items:center;
+  padding:0 var(--pad);
   text-align:center;
 }
-.hero__eyebrow{color:var(--dim);margin-bottom:clamp(16px,3svh,34px);text-shadow:0 1px 12px rgba(5,9,6,.9)}
+.hero__eyebrow{
+  position:absolute;top:clamp(84px,13svh,150px);left:var(--pad);right:var(--pad);
+  color:var(--dim);text-shadow:0 1px 12px rgba(5,9,6,.9);
+}
 
-.hero__h1{display:contents}
-/* The lines are `white-space:nowrap`, so a fixed clamp lets the LONGEST line
-   decide whether the headline fits — at 1440 "FOR EVERYTHING GOOD" measured
-   1423px inside 1440px, and anything narrower clipped it against .hero's
-   overflow. --ch carries the longest line's character count (set by the
-   generator, so it cannot drift from the copy) and 0.669 is Caprasimo's
-   measured average uppercase advance in em. Both lines share one size. */
-.hero__line{
-  display:block;
-  font-family:Caprasimo,serif;font-weight:900;
-  font-size:min(7rem, 8vw, calc(90vw / (var(--ch,16) * 0.669)));line-height:.96;
-  letter-spacing:-.02em;text-transform:uppercase;
-  white-space:nowrap;
-  text-shadow:0 6px 44px rgba(5,9,6,.92);
+.hero__h1{margin:0}
+/* ── THE HANDOVER PAIR ──────────────────────────────────────
+   .gate__stage and .hero__h1 must render pixel-identically. Ledger #48: a
+   wordmark that "flies" between two renderings lands wrong whenever the two
+   differ in any metric, so the safe move is to make them differ in NOTHING.
+   One rule sets both; do not give either its own size. */
+.gate__stage,.hero__h1{
+  display:grid;justify-items:center;
+  gap:clamp(16px,2.8svh,34px);
+}
+.gate__logo,.hero__mark{
+  width:min(86vw,1040px);height:auto;
+  filter:drop-shadow(0 10px 60px rgba(5,9,6,.85));
   will-change:transform;
 }
-.hero__mask{display:block;overflow:hidden;padding-block:.06em;margin-block:-.06em}
-.hero__inner{display:block;will-change:transform}
-.hero__line--b{color:var(--bronze-lift)}
-/* the gap the glass looks through */
-.hero__gap{flex:1 1 auto;min-height:clamp(120px,26svh,320px)}
+.gate__line,.hero__tag{
+  font-family:'JB Mono',ui-monospace,monospace;
+  font-size:clamp(.6rem,1vw,.76rem);
+  letter-spacing:.34em;text-transform:uppercase;
+  color:var(--bronze-lift);line-height:1.7;margin:0;
+}
 
-.hero__base{display:grid;gap:clamp(12px,1.8svh,20px);justify-items:center;margin-top:clamp(16px,2.6svh,28px)}
+.hero__base{
+  position:absolute;bottom:clamp(80px,13svh,140px);left:var(--pad);right:var(--pad);
+  display:grid;gap:clamp(12px,1.8svh,20px);justify-items:center;
+}
 .hero__blurb{max-width:52ch;color:var(--dim);font-size:clamp(.92rem,1.05vw,1.02rem);text-shadow:0 1px 14px rgba(5,9,6,.95)}
 .hero__acts{display:flex;gap:12px;flex-wrap:wrap;justify-content:center}
 
+/* Absolute, like the eyebrow and the base — the h1 must be the ONLY thing in
+   .hero__content's flow, or the grid centres the h1 and the hint as a pair and
+   the wordmark lands ~180px above the gate's copy, which breaks the handover. */
 .hero__scroll{
-  margin-top:clamp(12px,2svh,20px);color:var(--faint);
+  position:absolute;bottom:clamp(22px,4svh,44px);left:var(--pad);right:var(--pad);
+  color:var(--faint);
   animation:jgDrift 2.6s ease-in-out infinite;
 }
 @keyframes jgDrift{0%,100%{transform:translateY(0);opacity:.5}50%{transform:translateY(7px);opacity:1}}
@@ -828,6 +842,8 @@ body.gate-on{overflow:hidden}
     -webkit-overflow-scrolling:touch;padding-bottom:8px;
   }
   .crew__card{scroll-snap-align:center;width:min(74vw,300px);height:auto}
+  /* The empty slot needs the same treatment, but its rule has to live in the
+     additions block at the end of this file — see the note there. */
   .crew__card img{flex:0 0 auto;aspect-ratio:4/5;height:auto}
   .crew__progress{display:none}
 }
@@ -839,8 +855,12 @@ body.gate-on{overflow:hidden}
   .crew__note{display:none}
 }
 @media (max-width:720px){
-  .hero__line{white-space:normal;font-size:clamp(1.75rem,9.6vw,2.9rem);line-height:1.02}
-  .hero__gap{min-height:clamp(140px,30svh,300px)}
+  /* Both halves of the handover pair stay in lockstep on small screens too —
+     size ONE rule, never one of them. */
+  .gate__logo,.hero__mark{width:90vw}
+  .gate__line,.hero__tag{letter-spacing:.22em;font-size:.58rem}
+  .hero__eyebrow{top:clamp(74px,11svh,110px)}
+  .hero__base{bottom:clamp(64px,10svh,110px)}
   .hero__film{transform:scale(var(--film-s,1.15))}
   .room__mosaic{grid-template-columns:1fr}
   .room__cell--wide img{aspect-ratio:16/9}
@@ -903,10 +923,21 @@ body.gate-on{overflow:hidden}
   max-width:var(--maxw);margin:0 auto;padding:0 var(--pad);
   display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(18px,2.6vw,40px);
 }
-.method{border:1px solid var(--line);border-radius:200px 200px 14px 14px;
-  padding:clamp(26px,3vw,40px) clamp(20px,2.4vw,30px) clamp(24px,3vw,34px);
-  background:var(--moss);display:flex;flex-direction:column;gap:clamp(16px,2vw,24px)}
-.method__head{display:flex;align-items:center;gap:16px}
+/* The arch is a border-radius, so the top corners are CUT AWAY — anything
+   sitting in that corner renders outside the card's brown ground. With r=200
+   on a 405px card the boundary at x=30 is already 95px down, which is exactly
+   where the glass and title were landing. Two things fix it together:
+   the radius now scales with the card (a fixed 200px on a 1080px-wide
+   single-column card reads as clipped corners, not an arch), and the head is
+   centred so it sits under the dome's widest point instead of its edge. */
+.method{
+  --arch-r:clamp(96px,13vw,200px);
+  border:1px solid var(--line);
+  border-radius:var(--arch-r) var(--arch-r) 14px 14px;
+  padding:calc(var(--arch-r) * .34 + 22px) clamp(20px,2.4vw,30px) clamp(24px,3vw,34px);
+  background:var(--moss);display:flex;flex-direction:column;gap:clamp(16px,2vw,24px);
+}
+.method__head{display:flex;align-items:center;gap:16px;justify-content:center}
 .method__gl{width:clamp(34px,3.4vw,46px);height:auto;flex:0 0 auto;
   fill:none;stroke:var(--bronze-lift);stroke-width:3.4}
 .method__title{font-family:Caprasimo,serif;font-weight:900;text-transform:uppercase;
@@ -999,6 +1030,15 @@ body.gate-on{overflow:hidden}
   .classics__grid{grid-template-columns:1fr}
   .cellar__grid{grid-template-columns:1fr;gap:clamp(28px,5vw,48px)}
   .visit__grid{grid-template-columns:1fr}
+
+  /* Off the pin, the card is `height:auto`, so a `flex:1 1 0; min-height:0`
+     child resolves to nothing — the slot measured 1px and the whole rail
+     collapsed to a strip of text. The inherited sheet fixes the PORTRAIT the
+     same way, but that rule targets `img` and the empty slot is a div.
+     It has to be declared HERE, after `.crew__slot`'s own rule above: both
+     are single-class selectors, a media query adds no specificity, so source
+     order decides and the earlier copy inside the inherited block lost. */
+  .crew__slot{flex:0 0 auto;aspect-ratio:4/5;height:auto;min-height:0}
 }
 
 /* ── tap targets ─────────────────────────────────────────────

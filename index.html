@@ -57,8 +57,13 @@
   <svg class="gate__liquid" id="gateLiquid" viewBox="0 0 1200 1000" preserveAspectRatio="none" aria-hidden="true">
     <path id="gateWave" fill="#AE9E56" d="M0,1000 L0,1000 Q300,1000 600,1000 T1200,1000 L1200,1000 Z"/>
   </svg>
-  <div class="gate__inner">
-    <img class="gate__logo" src="assets/wordmark.svg" alt="Gilligogg" width="1071" height="191" />
+  <!-- This stage is metrically IDENTICAL to the hero's <h1> (same svg, same
+       width rule, same gap, same tagline metrics) and both are centred in the
+       viewport, so when the gate fades out the wordmark underneath is already
+       at exactly the same place. Nothing moves; the room simply comes up
+       behind it. Shared-element transition without a shared element. -->
+  <div class="gate__stage">
+    <img class="gate__logo" src="assets/wordmark.svg" alt="" width="1071" height="191" />
     <p class="gate__line mono" id="gateLine">EVERYTHING GOOD</p>
   </div>
   <p class="gate__count mono" id="gateCount">00</p>
@@ -113,10 +118,9 @@
   <div class="hero__content">
     <p class="hero__eyebrow mono">COCKTAIL BAR &middot; AUSTURSTRÆTI &middot; FACING AUSTURVÖLLUR</p>
 
-    <h1 class="hero__h1" style="--ch:19">
-      <span class="hero__line hero__line--a" id="lineA"><span class="hero__mask"><span class="hero__inner">A made-up word</span></span></span>
-      <span class="hero__gap" aria-hidden="true"></span>
-      <span class="hero__line hero__line--b" id="lineB"><span class="hero__mask"><span class="hero__inner">for everything good</span></span></span>
+    <h1 class="hero__h1">
+      <img class="hero__mark" id="heroMark" src="assets/wordmark.svg" alt="Gilligogg" width="1071" height="191" fetchpriority="high" />
+      <span class="hero__tag">A made-up word for everything good</span>
     </h1>
 
     <div class="hero__base" id="heroBase">

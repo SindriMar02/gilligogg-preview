@@ -129,10 +129,11 @@ const crewBlock = CREW_SLOTS.map((role, i) => `        <li class="crew__card cre
           </div>
         </li>`).join('\n');
 
-/* The hero's two lines never wrap, so the type size is derived from the longer
-   of them rather than from a fixed clamp. Change the copy and the fit follows. */
-const HERO = ['A made-up word', 'for everything good'];
-const HERO_CH = Math.max(...HERO.map(l => l.length));
+/* The landing is their wordmark, huge and centred, with the meaning of the word
+   set small underneath it. The <h1>'s accessible name is therefore
+   "Gilligogg A made-up word for everything good" — the img alt carries the
+   name, the tag carries the phrase, so the page still says what it is. */
+const HERO_TAG = 'A made-up word for everything good';
 
 const hoursRows = D.biz.hours.map(([d, a, b]) =>
   `<li${d === 'Fri' || d === 'Sat' ? ' class="hrs--late"' : ''}><span class="hrs__d mono">${d}</span><span class="hrs__t mono">${a} – ${b}</span></li>`).join('');
@@ -202,8 +203,13 @@ const html = `<!doctype html>
   <svg class="gate__liquid" id="gateLiquid" viewBox="0 0 1200 1000" preserveAspectRatio="none" aria-hidden="true">
     <path id="gateWave" fill="#AE9E56" d="M0,1000 L0,1000 Q300,1000 600,1000 T1200,1000 L1200,1000 Z"/>
   </svg>
-  <div class="gate__inner">
-    <img class="gate__logo" src="assets/wordmark.svg" alt="Gilligogg" width="1071" height="191" />
+  <!-- This stage is metrically IDENTICAL to the hero's <h1> (same svg, same
+       width rule, same gap, same tagline metrics) and both are centred in the
+       viewport, so when the gate fades out the wordmark underneath is already
+       at exactly the same place. Nothing moves; the room simply comes up
+       behind it. Shared-element transition without a shared element. -->
+  <div class="gate__stage">
+    <img class="gate__logo" src="assets/wordmark.svg" alt="" width="1071" height="191" />
     <p class="gate__line mono" id="gateLine">EVERYTHING GOOD</p>
   </div>
   <p class="gate__count mono" id="gateCount">00</p>
@@ -258,10 +264,9 @@ const html = `<!doctype html>
   <div class="hero__content">
     <p class="hero__eyebrow mono">COCKTAIL BAR &middot; AUSTURSTRÆTI &middot; FACING AUSTURVÖLLUR</p>
 
-    <h1 class="hero__h1" style="--ch:${HERO_CH}">
-      <span class="hero__line hero__line--a" id="lineA"><span class="hero__mask"><span class="hero__inner">${esc(HERO[0])}</span></span></span>
-      <span class="hero__gap" aria-hidden="true"></span>
-      <span class="hero__line hero__line--b" id="lineB"><span class="hero__mask"><span class="hero__inner">${esc(HERO[1])}</span></span></span>
+    <h1 class="hero__h1">
+      <img class="hero__mark" id="heroMark" src="assets/wordmark.svg" alt="Gilligogg" width="1071" height="191" fetchpriority="high" />
+      <span class="hero__tag">${esc(HERO_TAG)}</span>
     </h1>
 
     <div class="hero__base" id="heroBase">

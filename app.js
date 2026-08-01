@@ -144,8 +144,13 @@ const SCRUB_MODE = MOTION && DESKTOP;
   const AMP  = DESKTOP ? 1 : 0.55;         // halve amplitudes on small screens
   const EASE = 'expo.out';
 
-  /* ── hero entrance: time-based, never scroll-gated ────── */
-  gsap.set('.hero__inner', { yPercent: 112 });
+  /* ── hero entrance: time-based, never scroll-gated ──────
+     The wordmark is NOT hidden here. It is already on screen, sitting exactly
+     under the gate's identical copy, so the gate can dissolve straight off it.
+     All it does is settle from a hair oversized, which is what makes the room
+     read as arriving rather than cutting. */
+  gsap.set('#heroMark', { scale: 1.045 });
+  gsap.set('.hero__tag', { y: 14, opacity: 0 });
   // A still needs a deeper travel than the film did to read as motion at all —
   // single-digit drift over a pinned 170% reads as "stale", per the ledger.
   gsap.set('.hero__film',  { '--film-s': 1.05 });
@@ -156,10 +161,16 @@ const SCRUB_MODE = MOTION && DESKTOP;
   /* The entrance is held until the opening scene hands over, so it plays
      for the viewer instead of behind a full-screen loader, and so nothing
      re-renders it half-finished on the refresh that follows. */
-  const intro = gsap.timeline({ paused: true });
+  const intro = gsap.timeline({
+    paused: true,
+    // Re-measure once the entrance has actually landed, so every scrub tween
+    // that shares an element with it re-reads the real resting value.
+    onComplete: () => ScrollTrigger.refresh()
+  });
   intro
-    .to('.hero__inner', { yPercent: 0, duration: 1.05, ease: EASE, stagger: 0.14 }, 0)
-    .to('.hero__eyebrow', { y: 0, opacity: 1, duration: 0.7, ease: EASE }, 0.1)
+    .to('#heroMark',     { scale: 1, duration: 1.6, ease: 'expo.out' }, 0)
+    .to('.hero__tag',    { y: 0, opacity: 1, duration: 0.9, ease: EASE }, 0.18)
+    .to('.hero__eyebrow', { y: 0, opacity: 1, duration: 0.7, ease: EASE }, 0.24)
     .to('#heroBase',  { y: 0, opacity: 1, duration: 0.8, ease: EASE }, 0.42)
     .to('#heroHint',  { opacity: 1, duration: 0.6, ease: 'none' }, 0.75);
   window.__heroIntro = intro;
@@ -168,14 +179,22 @@ const SCRUB_MODE = MOTION && DESKTOP;
 
   /* ── the signature: pinned hero, scroll pushes into the room ── */
   if (SCRUB_MODE) {
+    /* invalidateOnRefresh matters here specifically because the entrance and
+       this scrub share elements (#heroMark, .hero__tag, #heroBase). The
+       handover refreshes BEFORE releasing the entrance — it has to, so the pin
+       measures correctly — which means every scrub tween would otherwise
+       record the entrance's START state as its resting value, and scrolling
+       back up would leave the wordmark stuck at scale 1.045 instead of 1.
+       Refreshing again once the entrance lands re-reads the true rest. */
     gsap.timeline({
       scrollTrigger: {
         trigger: '#heropin', start: 'top top', end: '+=170%',
-        pin: true, scrub: 0.55
+        pin: true, scrub: 0.55, invalidateOnRefresh: true
       }
     })
-      .to('#lineA',      { yPercent: -95, opacity: 0, ease: 'none', duration: 0.7, immediateRender: false }, 0.05)
-      .to('#lineB',      { yPercent: 120, opacity: 0, ease: 'none', duration: 0.7, immediateRender: false }, 0.12)
+      // scrolling walks INTO the room: the mark grows past you and clears
+      .to('#heroMark',   { scale: 1.34, opacity: 0, ease: 'none', duration: 0.78, immediateRender: false }, 0.04)
+      .to('.hero__tag',  { y: -34, opacity: 0, ease: 'none', duration: 0.4, immediateRender: false }, 0)
       .to('#heroBase',   { y: 40, opacity: 0, ease: 'none', duration: 0.45, immediateRender: false }, 0)
       .to('#heroHint',   { opacity: 0, ease: 'none', duration: 0.2, immediateRender: false }, 0)
       .to('.hero__film', { '--film-s': 1.30, ease: 'none', duration: 1 }, 0)
@@ -362,9 +381,17 @@ const SCRUB_MODE = MOTION && DESKTOP;
   const gate = $('#gate');
   if (!gate) return;
 
-  const seen = (() => { try { return sessionStorage.getItem('jg-gate') === '1'; } catch { return false; } })();
-  const kill = () => {
-    gate.remove();
+  const seen = (() => { try { return sessionStorage.getItem('gg-gate') === '1'; } catch { return false; } })();
+
+  /* Handover is split from teardown so the hero can start settling WHILE the
+     gate is still dissolving. That overlap is the whole effect: the room fades
+     up behind a wordmark that is already easing into place, instead of the
+     page cutting to a new screen. Idempotent — skip and the failsafe both
+     route through it. */
+  let handed = false;
+  const handover = () => {
+    if (handed) return;
+    handed = true;
     document.body.classList.remove('gate-on');
     if (window.__lenis) window.__lenis.start();
     if (typeof ScrollTrigger !== 'undefined') ScrollTrigger.refresh();
@@ -372,11 +399,12 @@ const SCRUB_MODE = MOTION && DESKTOP;
     // hero's true resting values and never a mid-entrance frame
     if (window.__heroIntro) window.__heroIntro.play(0);
   };
+  const kill = () => { handover(); gate.remove(); };
 
   if (seen || REDUCED || typeof gsap === 'undefined') { kill(); return; }
 
   document.body.classList.add('gate-on');
-  try { sessionStorage.setItem('jg-gate', '1'); } catch {}
+  try { sessionStorage.setItem('gg-gate', '1'); } catch {}
 
   const wave  = $('#gateWave');
   const count = $('#gateCount');
@@ -400,18 +428,25 @@ const SCRUB_MODE = MOTION && DESKTOP;
     onComplete: () => { if (!done) { done = true; gsap.ticker.remove(ticker); kill(); } }
   });
   tl.to(state, {
-      level: 1, duration: 2.5, ease: 'power1.inOut',
+      level: 1, duration: 2.4, ease: 'power1.inOut',
       onUpdate: () => { count.textContent = String(Math.round(state.level * 100)).padStart(2, '0'); }
     })
     .to(line, { opacity: 0, duration: 0.3, ease: 'none' }, '-=0.5')
     .set(line, { textContent: 'GILLIGOGG' })
     .to(line, { opacity: 1, duration: 0.35, ease: 'none' })
-    // the level drains away through an arch, taking the scene with it
+
+    /* THE HANDOVER. The gold falls back out of the frame, the counter and the
+       skip button leave first, then the whole gate dissolves. There is no
+       wipe and no cut: the hero's identical wordmark is already sitting on
+       exactly these pixels, so what the eye sees is the room rising behind a
+       mark that never moves. The hero entrance starts a beat into the
+       dissolve so the two overlap. */
+    .to(state, { level: 0, duration: 1.05, ease: 'power2.in' }, '+=0.22')
+    .to(['.gate__count', '#gateSkip'], { opacity: 0, duration: 0.35, ease: 'none' }, '<')
     .to(gate, {
-      clipPath: 'inset(0% 0 100% 0)', duration: 1.0, ease: 'expo.inOut'
-    }, '+=0.1')
-    .to(['.gate__logo', '.gate__count', '#gateSkip', '.gate__line'],
-      { opacity: 0, duration: 0.4, ease: 'none' }, '<');
+      opacity: 0, duration: 1.15, ease: 'power2.inOut',
+      onStart: handover
+    }, '<0.45');
 
   $('#gateSkip')?.addEventListener('click', () => {
     if (done) return;
