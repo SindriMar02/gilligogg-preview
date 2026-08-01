@@ -1,0 +1,668 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Gilligogg &middot; Cocktail bar, Austurstræti 12A, Reykjavík</title>
+<meta name="description" content="A cocktail bar on Austurstræti, facing Austurvöllur. Eight signature cocktails, twenty-two classics grouped by method, wine and bubbles, and happy hour 16 to 19 every day. Named after a word Kjarval made up." />
+<meta name="robots" content="noindex" />
+<meta name="theme-color" content="#0C0A09" />
+
+<meta property="og:type" content="website" />
+<meta property="og:title" content="Gilligogg &middot; Austurstræti 12A, Reykjavík" />
+<meta property="og:description" content="Kjarval's word for everything good. Eight signature cocktails, a room hung with four paintings of a Reykjavík that never existed, and happy hour every day from 16." />
+<meta property="og:image" content="assets/img/room1.webp" />
+<meta property="og:locale" content="en_GB" />
+
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+<link rel="icon" href="assets/favicon-48.png" type="image/png" sizes="48x48" />
+<link rel="icon" href="assets/favicon-32.png" type="image/png" sizes="32x32" />
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png" />
+<link rel="preload" href="assets/fonts/Caprasimo-Regular.woff2" as="font" type="font/woff2" crossorigin />
+<link rel="preload" href="assets/fonts/Switzer-Regular.woff2" as="font" type="font/woff2" crossorigin />
+<link rel="preload" as="image" href="assets/img/room1.webp" />
+<link rel="stylesheet" href="styles.css" />
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BarOrPub",
+  "name": "Gilligogg",
+  "url": "https://www.gilligogg.com",
+  "email": "gilligogg@gilligogg.com",
+  "servesCuisine": "Cocktails",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "Austurstræti 12A",
+    "postalCode": "101",
+    "addressLocality": "Reykjavík",
+    "addressCountry": "IS"
+  },
+  "openingHoursSpecification": [
+    { "@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday"], "opens": "14:00", "closes": "01:00" },
+    { "@type": "OpeningHoursSpecification", "dayOfWeek": ["Friday","Saturday"], "opens": "12:00", "closes": "03:00" },
+    { "@type": "OpeningHoursSpecification", "dayOfWeek": ["Sunday"], "opens": "12:00", "closes": "23:00" }
+  ]
+}
+</script>
+</head>
+<body>
+
+<a class="skip" href="#main">Skip to content</a>
+
+<!-- ══════════ opening scene ══════════
+     Their gold rises behind the wordmark and drains away. Kjarval shouted the
+     word coming down the hill; the page says it once before the room appears. -->
+<div class="gate" id="gate">
+  <svg class="gate__liquid" id="gateLiquid" viewBox="0 0 1200 1000" preserveAspectRatio="none" aria-hidden="true">
+    <path id="gateWave" fill="#AE9E56" d="M0,1000 L0,1000 Q300,1000 600,1000 T1200,1000 L1200,1000 Z"/>
+  </svg>
+  <!-- This stage is metrically IDENTICAL to the hero's <h1> (same svg, same
+       width rule, same gap, same tagline metrics) and both are centred in the
+       viewport, so when the gate fades out the wordmark underneath is already
+       at exactly the same place. Nothing moves; the room simply comes up
+       behind it. Shared-element transition without a shared element. -->
+  <div class="gate__stage">
+    <img class="gate__logo" src="assets/wordmark.svg" alt="" width="1071" height="191" />
+    <p class="gate__line mono" id="gateLine">EVERYTHING GOOD</p>
+  </div>
+  <p class="gate__count mono" id="gateCount">00</p>
+  <button class="gate__skip mono" id="gateSkip" type="button">Skip</button>
+</div>
+
+<!-- ══════════ header ══════════ -->
+<header class="hdr" id="hdr">
+  <p class="hdr__side hdr__side--l mono">AUSTURSTRÆTI 12A &middot; AUSTURVÖLLUR</p>
+
+  <a class="hdr__mark" href="#top" aria-label="Gilligogg, back to top">
+    <img src="assets/wordmark.svg" alt="Gilligogg" width="1071" height="191" />
+  </a>
+
+  <div class="hdr__side hdr__side--r">
+    <p class="mono hdr__open">HAPPY HOUR 16–19</p>
+    <button class="burger" id="burger" aria-expanded="false" aria-controls="menu" aria-label="Open menu">
+      <span class="burger__box" aria-hidden="true"><i></i><i></i></span>
+      <span class="burger__word mono" aria-hidden="true">MENU</span>
+    </button>
+  </div>
+</header>
+
+<div class="menu" id="menu" hidden>
+  <div class="menu__inner">
+    <nav class="menu__nav" aria-label="Site">
+      <a href="#drinks"><span><i class="mono" aria-hidden="true">01</i>The list</span></a>
+      <a href="#classics"><span><i class="mono" aria-hidden="true">02</i>Classics</span></a>
+      <a href="#paintings"><span><i class="mono" aria-hidden="true">03</i>The paintings</span></a>
+      <a href="#crew"><span><i class="mono" aria-hidden="true">04</i>The bar</span></a>
+      <a href="#cellar"><span><i class="mono" aria-hidden="true">05</i>Wine &amp; bubbles</span></a>
+      <a href="#happy"><span><i class="mono" aria-hidden="true">06</i>Happy hour</span></a>
+      <a href="#visit"><span><i class="mono" aria-hidden="true">07</i>Visit</span></a>
+    </nav>
+    <div class="menu__foot">
+      <p class="mono">AUSTURSTRÆTI 12A &middot; 101 REYKJAVÍK</p>
+      <a class="btn btn--main" href="mailto:gilligogg@gilligogg.com">gilligogg@gilligogg.com</a>
+    </div>
+  </div>
+</div>
+
+<main id="main">
+
+<!-- ══════════ 1. hero ══════════ -->
+<div class="heropin" id="heropin">
+<section class="hero" id="top">
+  <img class="hero__film" id="heroPlate" src="assets/img/room1.webp" alt="The curved bar at Gilligogg, brass rail and green tufted leather stools, bottles on the back shelf, with a large painted mural filling the wall behind." width="2000" height="1334" fetchpriority="high" decoding="async" />
+
+  <div class="hero__scrim" aria-hidden="true"></div>
+  <div class="hero__veil" aria-hidden="true"></div>
+
+  <div class="hero__content">
+    <p class="hero__eyebrow mono">COCKTAIL BAR &middot; AUSTURSTRÆTI &middot; FACING AUSTURVÖLLUR</p>
+
+    <h1 class="hero__h1">
+      <img class="hero__mark" id="heroMark" src="assets/wordmark.svg" alt="Gilligogg" width="1071" height="191" fetchpriority="high" />
+      <span class="hero__tag">A made-up word for everything good</span>
+    </h1>
+
+    <div class="hero__base" id="heroBase">
+      <p class="hero__blurb">Kjarval invented <em>gilligogg</em> and insisted it was pure Icelandic. It meant everything that is good. The bar took the word, and the room came with four paintings of a Reykjavík that never existed.</p>
+      <div class="hero__acts">
+        <a class="btn btn--main" href="#drinks">See the list</a>
+        <a class="btn btn--ghost" href="#visit">Find us</a>
+      </div>
+    </div>
+
+    <p class="hero__scroll mono" id="heroHint" aria-hidden="true">SCROLL</p>
+  </div>
+</section>
+</div>
+
+<!-- ══════════ 2. ticker ══════════ -->
+<section class="ticker" aria-hidden="true">
+  <div class="ticker__skew" id="tickSkew"><div class="ticker__track" id="tickTrack"></div></div>
+</section>
+
+<!-- ══════════ 3. thesis ══════════ -->
+<section class="thesis" id="about">
+  <div class="thesis__grid">
+    <div class="thesis__text">
+      <p class="kicker mono">01 / WHERE THE NAME COMES FROM</p>
+      <h2 class="h2">Kjarval shouted it<br /><em>coming down the hill</em></h2>
+      <p class="lead">He used it whenever something delighted him, and when people asked what it meant he told them it was pure Icelandic. He had made it up. It stood for everything good, and hello, and hurrah, and bravo, all at once.</p>
+      <blockquote class="quote">
+        <p>&bdquo;Gilligogg, gilligogg!&ldquo;</p>
+        <footer>
+          <span class="quote__who">Jóhannes S. Kjarval</span>
+          <span class="quote__src mono">MORGUNBLAÐIÐ &middot; 8 SEPT 1965</span>
+        </footer>
+      </blockquote>
+      <p class="thesis__gloss">The bar opened on Austurstræti in June 2024, took the painter's word for a name, and hung the walls with four large oil paintings by <em>Þrándur Þórarinsson</em>. Reykjavík as it looked early last century, crowded with faces from the city's cultural life, then and now.</p>
+    </div>
+
+    <ul class="facts">
+      <li><span class="facts__n">8</span><span class="facts__l">Signature cocktails on the current list, each one built here rather than borrowed</span></li>
+      <li><span class="facts__n">22</span><span class="facts__l">Classics, grouped the way the bar groups them: highballs, stirred, shaken</span></li>
+      <li><span class="facts__n">4</span><span class="facts__l">Large oil paintings by Þrándur Þórarinsson on the walls of the room</span></li>
+      <li><span class="facts__n">16<sup>–19</sup></span><span class="facts__l">Happy hour, every single day of the week</span></li>
+    </ul>
+  </div>
+
+  <figure class="bleed bleed--tall" data-pour>
+    <img src="assets/img/room1.webp" alt="The curved bar at Gilligogg, brass rail and green tufted leather stools, bottles on the back shelf, with a large painted mural filling the wall behind." width="2000" height="1334" loading="lazy" decoding="async" />
+    <figcaption class="mono">THE BAR · AUSTURSTRÆTI 12A</figcaption>
+  </figure>
+</section>
+
+<!-- ══════════ 4. the list — every drink builds its own glass ══════════ -->
+<section class="drinks paper" id="drinks">
+  <header class="sec-head">
+    <p class="kicker mono">02 / THE LIST</p>
+    <h2 class="h2">Every drink,<br />poured in front of you</h2>
+    <p class="sec-head__note">Their menu is published as nine photographs of a printed sheet, so none of it can be read by a search engine, a screen reader or a phone. Here it is as text. Every drink pours itself into the glass its own descriptor calls for, one band per ingredient.</p>
+  </header>
+
+  <div class="sheet">
+      <section class="course" aria-labelledby="course-sig">
+        <header class="course__head">
+          <h3 class="course__title" id="course-sig">Signatures</h3>
+          <p class="course__price mono">3.200 kr.</p>
+        </header>
+        <ul class="course__list">
+          <li class="dish">
+            <div class="dish__glass" aria-hidden="true">
+              <svg viewBox="0 0 100 130" class="gl" data-fill>
+                <defs><clipPath id="cp-sig-0"><path d="M14 34 Q14 78 46 84 L46 112 L30 118 L30 124 L70 124 L70 118 L54 112 L54 84 Q86 78 86 34 Z"/></clipPath></defs>
+                <g clip-path="url(#cp-sig-0)"><rect class="gl__band" data-band="0" x="0" y="71.3" width="100" height="12.3" fill="#A9743C"/><rect class="gl__band" data-band="1" x="0" y="59.5" width="100" height="12.3" fill="#E1A24E"/><rect class="gl__band" data-band="2" x="0" y="47.8" width="100" height="12.3" fill="#8FBE3A"/><rect class="gl__band" data-band="3" x="0" y="36.0" width="100" height="12.3" fill="#9DBE6B"/></g>
+                <path class="gl__out" d="M14 34 Q14 78 46 84 L46 112 L30 118 L30 124 L70 124 L70 118 L54 112 L54 84 Q86 78 86 34 Z"/>
+              </svg>
+            </div>
+            <div class="dish__body">
+              <p class="dish__top"><span class="dish__n mono">01</span><span class="dish__name">Pistachio</span><span class="dish__rule" aria-hidden="true"></span><span class="dish__p mono">3.200</span></p>
+              <p class="dish__note">Short, silky, sweet</p>
+              <ul class="dish__spec"><li data-ing="0"><i style="--c:#A9743C" aria-hidden="true"></i>Pineapple Rum</li><li data-ing="1"><i style="--c:#E1A24E" aria-hidden="true"></i>Cointreau</li><li data-ing="2"><i style="--c:#8FBE3A" aria-hidden="true"></i>Lime</li><li data-ing="3"><i style="--c:#9DBE6B" aria-hidden="true"></i>Pistachio Ice Cream</li></ul>
+            </div>
+          </li>
+          <li class="dish">
+            <div class="dish__glass" aria-hidden="true">
+              <svg viewBox="0 0 100 130" class="gl" data-fill>
+                <defs><clipPath id="cp-sig-1"><path d="M14 34 Q14 78 46 84 L46 112 L30 118 L30 124 L70 124 L70 118 L54 112 L54 84 Q86 78 86 34 Z"/></clipPath></defs>
+                <g clip-path="url(#cp-sig-1)"><rect class="gl__band" data-band="0" x="0" y="71.3" width="100" height="12.3" fill="#DCE3D4"/><rect class="gl__band" data-band="1" x="0" y="59.5" width="100" height="12.3" fill="#CF5A55"/><rect class="gl__band" data-band="2" x="0" y="47.8" width="100" height="12.3" fill="#93A87C"/><rect class="gl__band" data-band="3" x="0" y="36.0" width="100" height="12.3" fill="#B4713F"/></g>
+                <path class="gl__out" d="M14 34 Q14 78 46 84 L46 112 L30 118 L30 124 L70 124 L70 118 L54 112 L54 84 Q86 78 86 34 Z"/>
+              </svg>
+            </div>
+            <div class="dish__body">
+              <p class="dish__top"><span class="dish__n mono">02</span><span class="dish__name">Barbara</span><span class="dish__rule" aria-hidden="true"></span><span class="dish__p mono">3.200</span></p>
+              <p class="dish__note">Short, sour, smooth</p>
+              <ul class="dish__spec"><li data-ing="0"><i style="--c:#DCE3D4" aria-hidden="true"></i>Coconut oil washed Brennivín</li><li data-ing="1"><i style="--c:#CF5A55" aria-hidden="true"></i>Rhubarb</li><li data-ing="2"><i style="--c:#93A87C" aria-hidden="true"></i>Sage</li><li data-ing="3"><i style="--c:#B4713F" aria-hidden="true"></i>Vermouth</li></ul>
+            </div>
+          </li>
+          <li class="dish">
+            <div class="dish__glass" aria-hidden="true">
+              <svg viewBox="0 0 100 130" class="gl" data-fill>
+                <defs><clipPath id="cp-sig-2"><path d="M14 34 Q14 78 46 84 L46 112 L30 118 L30 124 L70 124 L70 118 L54 112 L54 84 Q86 78 86 34 Z"/></clipPath></defs>
+                <g clip-path="url(#cp-sig-2)"><rect class="gl__band" data-band="0" x="0" y="71.3" width="100" height="12.3" fill="#7E3220"/><rect class="gl__band" data-band="1" x="0" y="59.5" width="100" height="12.3" fill="#B5772F"/><rect class="gl__band" data-band="2" x="0" y="47.8" width="100" height="12.3" fill="#E9E4CE"/><rect class="gl__band" data-band="3" x="0" y="36.0" width="100" height="12.3" fill="#7B3557"/></g>
+                <path class="gl__out" d="M14 34 Q14 78 46 84 L46 112 L30 118 L30 124 L70 124 L70 118 L54 112 L54 84 Q86 78 86 34 Z"/>
+              </svg>
+            </div>
+            <div class="dish__body">
+              <p class="dish__top"><span class="dish__n mono">03</span><span class="dish__name">Sugar Plum Fairy</span><span class="dish__rule" aria-hidden="true"></span><span class="dish__p mono">3.200</span></p>
+              <p class="dish__note">Short, herbal, fruit</p>
+              <ul class="dish__spec"><li data-ing="0"><i style="--c:#7E3220" aria-hidden="true"></i>Amaro Montenegro</li><li data-ing="1"><i style="--c:#B5772F" aria-hidden="true"></i>Singleton 12</li><li data-ing="2"><i style="--c:#E9E4CE" aria-hidden="true"></i>Plum Saké</li><li data-ing="3"><i style="--c:#7B3557" aria-hidden="true"></i>Plums</li></ul>
+            </div>
+          </li>
+          <li class="dish">
+            <div class="dish__glass" aria-hidden="true">
+              <svg viewBox="0 0 100 130" class="gl" data-fill>
+                <defs><clipPath id="cp-sig-3"><path d="M14 34 Q14 78 46 84 L46 112 L30 118 L30 124 L70 124 L70 118 L54 112 L54 84 Q86 78 86 34 Z"/></clipPath></defs>
+                <g clip-path="url(#cp-sig-3)"><rect class="gl__band" data-band="0" x="0" y="71.3" width="100" height="12.3" fill="#B5772F"/><rect class="gl__band" data-band="1" x="0" y="59.5" width="100" height="12.3" fill="#8A5A22"/><rect class="gl__band" data-band="2" x="0" y="47.8" width="100" height="12.3" fill="#9A6636"/><rect class="gl__band" data-band="3" x="0" y="36.0" width="100" height="12.3" fill="#B07434"/></g>
+                <path class="gl__out" d="M14 34 Q14 78 46 84 L46 112 L30 118 L30 124 L70 124 L70 118 L54 112 L54 84 Q86 78 86 34 Z"/>
+              </svg>
+            </div>
+            <div class="dish__body">
+              <p class="dish__top"><span class="dish__n mono">04</span><span class="dish__name">Miso Nuts</span><span class="dish__rule" aria-hidden="true"></span><span class="dish__p mono">3.400</span></p>
+              <p class="dish__note">Short, nutty, savoury</p>
+              <ul class="dish__spec"><li data-ing="0"><i style="--c:#B5772F" aria-hidden="true"></i>Monkey Shoulder Whiskey</li><li data-ing="1"><i style="--c:#8A5A22" aria-hidden="true"></i>Miso</li><li data-ing="2"><i style="--c:#9A6636" aria-hidden="true"></i>Hazelnuts</li><li data-ing="3"><i style="--c:#B07434" aria-hidden="true"></i>Amontillado sherry</li></ul>
+            </div>
+          </li>
+          <li class="dish">
+            <div class="dish__glass" aria-hidden="true">
+              <svg viewBox="0 0 100 130" class="gl" data-fill>
+                <defs><clipPath id="cp-sig-4"><path d="M18 30 L23 118 Q23 124 30 124 L70 124 Q77 124 77 118 L82 30 Z"/></clipPath></defs>
+                <g clip-path="url(#cp-sig-4)"><rect class="gl__band" data-band="0" x="0" y="104.2" width="100" height="18.4" fill="#E7EAE4"/><rect class="gl__band" data-band="1" x="0" y="86.4" width="100" height="18.4" fill="#B08A45"/><rect class="gl__band" data-band="2" x="0" y="68.6" width="100" height="18.4" fill="#E3E7DC"/><rect class="gl__band" data-band="3" x="0" y="50.8" width="100" height="18.4" fill="#8E6FA8"/><rect class="gl__band" data-band="4" x="0" y="33.0" width="100" height="18.4" fill="#DCE6E6"/></g>
+                <path class="gl__out" d="M18 30 L23 118 Q23 124 30 124 L70 124 Q77 124 77 118 L82 30 Z"/>
+              </svg>
+            </div>
+            <div class="dish__body">
+              <p class="dish__top"><span class="dish__n mono">05</span><span class="dish__name">Got Any Grapes?</span><span class="dish__rule" aria-hidden="true"></span><span class="dish__p mono">3.100</span></p>
+              <p class="dish__note">Long, fizzy, herbal</p>
+              <ul class="dish__spec"><li data-ing="0"><i style="--c:#E7EAE4" aria-hidden="true"></i>Vodka</li><li data-ing="1"><i style="--c:#B08A45" aria-hidden="true"></i>Tea</li><li data-ing="2"><i style="--c:#E3E7DC" aria-hidden="true"></i>Pisco</li><li data-ing="3"><i style="--c:#8E6FA8" aria-hidden="true"></i>Grapes</li><li data-ing="4"><i style="--c:#DCE6E6" aria-hidden="true"></i>Soda</li></ul>
+            </div>
+          </li>
+          <li class="dish">
+            <div class="dish__glass" aria-hidden="true">
+              <svg viewBox="0 0 100 130" class="gl" data-fill>
+                <defs><clipPath id="cp-sig-5"><path d="M18 30 L23 118 Q23 124 30 124 L70 124 Q77 124 77 118 L82 30 Z"/></clipPath></defs>
+                <g clip-path="url(#cp-sig-5)"><rect class="gl__band" data-band="0" x="0" y="107.2" width="100" height="15.4" fill="#E7EAE4"/><rect class="gl__band" data-band="1" x="0" y="92.3" width="100" height="15.4" fill="#9A5A2C"/><rect class="gl__band" data-band="2" x="0" y="77.5" width="100" height="15.4" fill="#E5CE62"/><rect class="gl__band" data-band="3" x="0" y="62.7" width="100" height="15.4" fill="#A8202F"/><rect class="gl__band" data-band="4" x="0" y="47.8" width="100" height="15.4" fill="#DCE6E6"/><rect class="gl__band" data-band="5" x="0" y="33.0" width="100" height="15.4" fill="#D9558E"/></g>
+                <path class="gl__out" d="M18 30 L23 118 Q23 124 30 124 L70 124 Q77 124 77 118 L82 30 Z"/>
+              </svg>
+            </div>
+            <div class="dish__body">
+              <p class="dish__top"><span class="dish__n mono">06</span><span class="dish__name">Candy Man</span><span class="dish__rule" aria-hidden="true"></span><span class="dish__p mono">3.100</span></p>
+              <p class="dish__note">Long, sweet, fizzy</p>
+              <ul class="dish__spec"><li data-ing="0"><i style="--c:#E7EAE4" aria-hidden="true"></i>Vodka</li><li data-ing="1"><i style="--c:#9A5A2C" aria-hidden="true"></i>Amaretto</li><li data-ing="2"><i style="--c:#E5CE62" aria-hidden="true"></i>Banana</li><li data-ing="3"><i style="--c:#A8202F" aria-hidden="true"></i>Cherries</li><li data-ing="4"><i style="--c:#DCE6E6" aria-hidden="true"></i>Soda</li><li data-ing="5"><i style="--c:#D9558E" aria-hidden="true"></i>Lollipop</li></ul>
+            </div>
+          </li>
+          <li class="dish">
+            <div class="dish__glass" aria-hidden="true">
+              <svg viewBox="0 0 100 130" class="gl" data-fill>
+                <defs><clipPath id="cp-sig-6"><path d="M14 34 Q14 78 46 84 L46 112 L30 118 L30 124 L70 124 L70 118 L54 112 L54 84 Q86 78 86 34 Z"/></clipPath></defs>
+                <g clip-path="url(#cp-sig-6)"><rect class="gl__band" data-band="0" x="0" y="73.6" width="100" height="10.0" fill="#A9743C"/><rect class="gl__band" data-band="1" x="0" y="64.2" width="100" height="10.0" fill="#C93A4A"/><rect class="gl__band" data-band="2" x="0" y="54.8" width="100" height="10.0" fill="#EDE8D8"/><rect class="gl__band" data-band="3" x="0" y="45.4" width="100" height="10.0" fill="#4A2A1E"/><rect class="gl__band" data-band="4" x="0" y="36.0" width="100" height="10.0" fill="#8FBE3A"/></g>
+                <path class="gl__out" d="M14 34 Q14 78 46 84 L46 112 L30 118 L30 124 L70 124 L70 118 L54 112 L54 84 Q86 78 86 34 Z"/>
+              </svg>
+            </div>
+            <div class="dish__body">
+              <p class="dish__top"><span class="dish__n mono">07</span><span class="dish__name">Garpur!</span><span class="dish__rule" aria-hidden="true"></span><span class="dish__p mono">3.200</span></p>
+              <p class="dish__note">Short, fresh, fruity</p>
+              <ul class="dish__spec"><li data-ing="0"><i style="--c:#A9743C" aria-hidden="true"></i>Banana Rum</li><li data-ing="1"><i style="--c:#C93A4A" aria-hidden="true"></i>Strawberries</li><li data-ing="2"><i style="--c:#EDE8D8" aria-hidden="true"></i>Whey</li><li data-ing="3"><i style="--c:#4A2A1E" aria-hidden="true"></i>Balsamico</li><li data-ing="4"><i style="--c:#8FBE3A" aria-hidden="true"></i>Lime</li></ul>
+            </div>
+          </li>
+          <li class="dish">
+            <div class="dish__glass" aria-hidden="true">
+              <svg viewBox="0 0 100 130" class="gl" data-fill>
+                <defs><clipPath id="cp-sig-7"><path d="M14 34 Q14 78 46 84 L46 112 L30 118 L30 124 L70 124 L70 118 L54 112 L54 84 Q86 78 86 34 Z"/></clipPath></defs>
+                <g clip-path="url(#cp-sig-7)"><rect class="gl__band" data-band="0" x="0" y="73.6" width="100" height="10.0" fill="#DDE4DA"/><rect class="gl__band" data-band="1" x="0" y="64.2" width="100" height="10.0" fill="#EFE7CE"/><rect class="gl__band" data-band="2" x="0" y="54.8" width="100" height="10.0" fill="#E9D451"/><rect class="gl__band" data-band="3" x="0" y="45.4" width="100" height="10.0" fill="#E0C25C"/><rect class="gl__band" data-band="4" x="0" y="36.0" width="100" height="10.0" fill="#EFE7D4"/></g>
+                <path class="gl__out" d="M14 34 Q14 78 46 84 L46 112 L30 118 L30 124 L70 124 L70 118 L54 112 L54 84 Q86 78 86 34 Z"/>
+              </svg>
+            </div>
+            <div class="dish__body">
+              <p class="dish__top"><span class="dish__n mono">08</span><span class="dish__name">Jasmine Gimlet</span><span class="dish__rule" aria-hidden="true"></span><span class="dish__p mono">3.200</span></p>
+              <p class="dish__note">Short, floral, creamy</p>
+              <ul class="dish__spec"><li data-ing="0"><i style="--c:#DDE4DA" aria-hidden="true"></i>Gin</li><li data-ing="1"><i style="--c:#EFE7CE" aria-hidden="true"></i>Jasmine</li><li data-ing="2"><i style="--c:#E9D451" aria-hidden="true"></i>Lemon</li><li data-ing="3"><i style="--c:#E0C25C" aria-hidden="true"></i>Bora Bora</li><li data-ing="4"><i style="--c:#EFE7D4" aria-hidden="true"></i>Clarified with vegan cream</li></ul>
+            </div>
+          </li>
+        </ul>
+      </section>
+      <section class="course" aria-labelledby="course-spr">
+        <header class="course__head">
+          <h3 class="course__title" id="course-spr">Spritzes</h3>
+          <p class="course__price mono">2.650 kr.</p>
+        </header>
+        <ul class="course__list">
+          <li class="dish">
+            <div class="dish__glass" aria-hidden="true">
+              <svg viewBox="0 0 100 130" class="gl" data-fill>
+                <defs><clipPath id="cp-spr-0"><path d="M22 30 Q22 76 46 84 L46 112 L32 118 L32 124 L68 124 L68 118 L54 112 L54 84 Q78 76 78 30 Z"/></clipPath></defs>
+                <g clip-path="url(#cp-spr-0)"><rect class="gl__band" data-band="0" x="0" y="66.7" width="100" height="16.9" fill="#E4622A"/><rect class="gl__band" data-band="1" x="0" y="50.3" width="100" height="16.9" fill="#EDE2B4"/><rect class="gl__band" data-band="2" x="0" y="34.0" width="100" height="16.9" fill="#E28B2A"/></g>
+                <path class="gl__out" d="M22 30 Q22 76 46 84 L46 112 L32 118 L32 124 L68 124 L68 118 L54 112 L54 84 Q78 76 78 30 Z"/>
+              </svg>
+            </div>
+            <div class="dish__body">
+              <p class="dish__top"><span class="dish__n mono">01</span><span class="dish__name">Aperol Spritz</span><span class="dish__rule" aria-hidden="true"></span><span class="dish__p mono">2.650</span></p>
+              
+              <ul class="dish__spec"><li data-ing="0"><i style="--c:#E4622A" aria-hidden="true"></i>Aperol</li><li data-ing="1"><i style="--c:#EDE2B4" aria-hidden="true"></i>Prosecco</li><li data-ing="2"><i style="--c:#E28B2A" aria-hidden="true"></i>Orange</li></ul>
+            </div>
+          </li>
+          <li class="dish">
+            <div class="dish__glass" aria-hidden="true">
+              <svg viewBox="0 0 100 130" class="gl" data-fill>
+                <defs><clipPath id="cp-spr-1"><path d="M22 30 Q22 76 46 84 L46 112 L32 118 L32 124 L68 124 L68 118 L54 112 L54 84 Q78 76 78 30 Z"/></clipPath></defs>
+                <g clip-path="url(#cp-spr-1)"><rect class="gl__band" data-band="0" x="0" y="66.7" width="100" height="16.9" fill="#E3DFA8"/><rect class="gl__band" data-band="1" x="0" y="50.3" width="100" height="16.9" fill="#EDE2B4"/><rect class="gl__band" data-band="2" x="0" y="34.0" width="100" height="16.9" fill="#E9D451"/></g>
+                <path class="gl__out" d="M22 30 Q22 76 46 84 L46 112 L32 118 L32 124 L68 124 L68 118 L54 112 L54 84 Q78 76 78 30 Z"/>
+              </svg>
+            </div>
+            <div class="dish__body">
+              <p class="dish__top"><span class="dish__n mono">02</span><span class="dish__name">Hugo Spritz</span><span class="dish__rule" aria-hidden="true"></span><span class="dish__p mono">2.650</span></p>
+              
+              <ul class="dish__spec"><li data-ing="0"><i style="--c:#E3DFA8" aria-hidden="true"></i>St. Germain</li><li data-ing="1"><i style="--c:#EDE2B4" aria-hidden="true"></i>Prosecco</li><li data-ing="2"><i style="--c:#E9D451" aria-hidden="true"></i>Lemon</li></ul>
+            </div>
+          </li>
+          <li class="dish">
+            <div class="dish__glass" aria-hidden="true">
+              <svg viewBox="0 0 100 130" class="gl" data-fill>
+                <defs><clipPath id="cp-spr-2"><path d="M22 30 Q22 76 46 84 L46 112 L32 118 L32 124 L68 124 L68 118 L54 112 L54 84 Q78 76 78 30 Z"/></clipPath></defs>
+                <g clip-path="url(#cp-spr-2)"><rect class="gl__band" data-band="0" x="0" y="66.7" width="100" height="16.9" fill="#E06A86"/><rect class="gl__band" data-band="1" x="0" y="50.3" width="100" height="16.9" fill="#EDE2B4"/><rect class="gl__band" data-band="2" x="0" y="34.0" width="100" height="16.9" fill="#8FBE3A"/></g>
+                <path class="gl__out" d="M22 30 Q22 76 46 84 L46 112 L32 118 L32 124 L68 124 L68 118 L54 112 L54 84 Q78 76 78 30 Z"/>
+              </svg>
+            </div>
+            <div class="dish__body">
+              <p class="dish__top"><span class="dish__n mono">03</span><span class="dish__name">Pink Sarti Spritz</span><span class="dish__rule" aria-hidden="true"></span><span class="dish__p mono">2.650</span></p>
+              
+              <ul class="dish__spec"><li data-ing="0"><i style="--c:#E06A86" aria-hidden="true"></i>Sarti</li><li data-ing="1"><i style="--c:#EDE2B4" aria-hidden="true"></i>Prosecco</li><li data-ing="2"><i style="--c:#8FBE3A" aria-hidden="true"></i>Lime</li></ul>
+            </div>
+          </li>
+          <li class="dish">
+            <div class="dish__glass" aria-hidden="true">
+              <svg viewBox="0 0 100 130" class="gl" data-fill>
+                <defs><clipPath id="cp-spr-3"><path d="M22 30 Q22 76 46 84 L46 112 L32 118 L32 124 L68 124 L68 118 L54 112 L54 84 Q78 76 78 30 Z"/></clipPath></defs>
+                <g clip-path="url(#cp-spr-3)"><rect class="gl__band" data-band="0" x="0" y="66.7" width="100" height="16.9" fill="#EBC53C"/><rect class="gl__band" data-band="1" x="0" y="50.3" width="100" height="16.9" fill="#EDE2B4"/><rect class="gl__band" data-band="2" x="0" y="34.0" width="100" height="16.9" fill="#E9D451"/></g>
+                <path class="gl__out" d="M22 30 Q22 76 46 84 L46 112 L32 118 L32 124 L68 124 L68 118 L54 112 L54 84 Q78 76 78 30 Z"/>
+              </svg>
+            </div>
+            <div class="dish__body">
+              <p class="dish__top"><span class="dish__n mono">04</span><span class="dish__name">Limoncello Spritz</span><span class="dish__rule" aria-hidden="true"></span><span class="dish__p mono">2.650</span></p>
+              
+              <ul class="dish__spec"><li data-ing="0"><i style="--c:#EBC53C" aria-hidden="true"></i>Limoncello</li><li data-ing="1"><i style="--c:#EDE2B4" aria-hidden="true"></i>Prosecco</li><li data-ing="2"><i style="--c:#E9D451" aria-hidden="true"></i>Lemon</li></ul>
+            </div>
+          </li>
+          <li class="dish">
+            <div class="dish__glass" aria-hidden="true">
+              <svg viewBox="0 0 100 130" class="gl" data-fill>
+                <defs><clipPath id="cp-spr-4"><path d="M22 30 Q22 76 46 84 L46 112 L32 118 L32 124 L68 124 L68 118 L54 112 L54 84 Q78 76 78 30 Z"/></clipPath></defs>
+                <g clip-path="url(#cp-spr-4)"><rect class="gl__band" data-band="0" x="0" y="66.7" width="100" height="16.9" fill="#C0202B"/><rect class="gl__band" data-band="1" x="0" y="50.3" width="100" height="16.9" fill="#EDE2B4"/><rect class="gl__band" data-band="2" x="0" y="34.0" width="100" height="16.9" fill="#E28B2A"/></g>
+                <path class="gl__out" d="M22 30 Q22 76 46 84 L46 112 L32 118 L32 124 L68 124 L68 118 L54 112 L54 84 Q78 76 78 30 Z"/>
+              </svg>
+            </div>
+            <div class="dish__body">
+              <p class="dish__top"><span class="dish__n mono">05</span><span class="dish__name">Campari Spritz</span><span class="dish__rule" aria-hidden="true"></span><span class="dish__p mono">2.650</span></p>
+              
+              <ul class="dish__spec"><li data-ing="0"><i style="--c:#C0202B" aria-hidden="true"></i>Campari</li><li data-ing="1"><i style="--c:#EDE2B4" aria-hidden="true"></i>Prosecco</li><li data-ing="2"><i style="--c:#E28B2A" aria-hidden="true"></i>Orange</li></ul>
+            </div>
+          </li>
+        </ul>
+      </section>
+      <section class="course" aria-labelledby="course-zero">
+        <header class="course__head">
+          <h3 class="course__title" id="course-zero">Zero percent</h3>
+          <p class="course__price mono">1.500 kr.</p>
+        </header>
+        <ul class="course__list">
+          <li class="dish">
+            <div class="dish__glass" aria-hidden="true">
+              <svg viewBox="0 0 100 130" class="gl" data-fill>
+                <defs><clipPath id="cp-zero-0"><path d="M28 20 L31 118 Q31 124 38 124 L62 124 Q69 124 69 118 L72 20 Z"/></clipPath></defs>
+                <g clip-path="url(#cp-zero-0)"><rect class="gl__band" data-band="0" x="0" y="72.5" width="100" height="50.1" fill="#6E9C43"/><rect class="gl__band" data-band="1" x="0" y="23.0" width="100" height="50.1" fill="#E1745A"/></g>
+                <path class="gl__out" d="M28 20 L31 118 Q31 124 38 124 L62 124 Q69 124 69 118 L72 20 Z"/>
+              </svg>
+            </div>
+            <div class="dish__body">
+              <p class="dish__top"><span class="dish__n mono">01</span><span class="dish__name">Basil &amp; Grape</span><span class="dish__rule" aria-hidden="true"></span><span class="dish__p mono">1.500</span></p>
+              
+              <ul class="dish__spec"><li data-ing="0"><i style="--c:#6E9C43" aria-hidden="true"></i>Basil</li><li data-ing="1"><i style="--c:#E1745A" aria-hidden="true"></i>Grapefruit Soda</li></ul>
+            </div>
+          </li>
+          <li class="dish">
+            <div class="dish__glass" aria-hidden="true">
+              <svg viewBox="0 0 100 130" class="gl" data-fill>
+                <defs><clipPath id="cp-zero-1"><path d="M28 20 L31 118 Q31 124 38 124 L62 124 Q69 124 69 118 L72 20 Z"/></clipPath></defs>
+                <g clip-path="url(#cp-zero-1)"><rect class="gl__band" data-band="0" x="0" y="89.0" width="100" height="33.6" fill="#E1745A"/><rect class="gl__band" data-band="1" x="0" y="56.0" width="100" height="33.6" fill="#B4632A"/><rect class="gl__band" data-band="2" x="0" y="23.0" width="100" height="33.6" fill="#DCE6E6"/></g>
+                <path class="gl__out" d="M28 20 L31 118 Q31 124 38 124 L62 124 Q69 124 69 118 L72 20 Z"/>
+              </svg>
+            </div>
+            <div class="dish__body">
+              <p class="dish__top"><span class="dish__n mono">02</span><span class="dish__name">Paloma 0%!</span><span class="dish__rule" aria-hidden="true"></span><span class="dish__p mono">1.500</span></p>
+              <p class="dish__note">Can be made spicy</p>
+              <ul class="dish__spec"><li data-ing="0"><i style="--c:#E1745A" aria-hidden="true"></i>Grapefruit</li><li data-ing="1"><i style="--c:#B4632A" aria-hidden="true"></i>Spices</li><li data-ing="2"><i style="--c:#DCE6E6" aria-hidden="true"></i>Soda</li></ul>
+            </div>
+          </li>
+          <li class="dish">
+            <div class="dish__glass" aria-hidden="true">
+              <svg viewBox="0 0 100 130" class="gl" data-fill>
+                <defs><clipPath id="cp-zero-2"><path d="M28 20 L31 118 Q31 124 38 124 L62 124 Q69 124 69 118 L72 20 Z"/></clipPath></defs>
+                <g clip-path="url(#cp-zero-2)"><rect class="gl__band" data-band="0" x="0" y="89.0" width="100" height="33.6" fill="#B23A2A"/><rect class="gl__band" data-band="1" x="0" y="56.0" width="100" height="33.6" fill="#7E3220"/><rect class="gl__band" data-band="2" x="0" y="23.0" width="100" height="33.6" fill="#EDE6C4"/></g>
+                <path class="gl__out" d="M28 20 L31 118 Q31 124 38 124 L62 124 Q69 124 69 118 L72 20 Z"/>
+              </svg>
+            </div>
+            <div class="dish__body">
+              <p class="dish__top"><span class="dish__n mono">03</span><span class="dish__name">Sbagliato 0%</span><span class="dish__rule" aria-hidden="true"></span><span class="dish__p mono">1.500</span></p>
+              
+              <ul class="dish__spec"><li data-ing="0"><i style="--c:#B23A2A" aria-hidden="true"></i>Bitter</li><li data-ing="1"><i style="--c:#7E3220" aria-hidden="true"></i>Amaro</li><li data-ing="2"><i style="--c:#EDE6C4" aria-hidden="true"></i>Sparkling wine</li></ul>
+            </div>
+          </li>
+          <li class="dish">
+            <div class="dish__glass" aria-hidden="true">
+              <svg viewBox="0 0 100 130" class="gl" data-fill>
+                <defs><clipPath id="cp-zero-3"><path d="M28 20 L31 118 Q31 124 38 124 L62 124 Q69 124 69 118 L72 20 Z"/></clipPath></defs>
+                <g clip-path="url(#cp-zero-3)"><rect class="gl__band" data-band="0" x="0" y="97.3" width="100" height="25.4" fill="#E7E4BC"/><rect class="gl__band" data-band="1" x="0" y="72.5" width="100" height="25.4" fill="#B9CE55"/><rect class="gl__band" data-band="2" x="0" y="47.8" width="100" height="25.4" fill="#D7D688"/><rect class="gl__band" data-band="3" x="0" y="23.0" width="100" height="25.4" fill="#DDE7E4"/></g>
+                <path class="gl__out" d="M28 20 L31 118 Q31 124 38 124 L62 124 Q69 124 69 118 L72 20 Z"/>
+              </svg>
+            </div>
+            <div class="dish__body">
+              <p class="dish__top"><span class="dish__n mono">04</span><span class="dish__name">Feel the Fall</span><span class="dish__rule" aria-hidden="true"></span><span class="dish__p mono">1.500</span></p>
+              
+              <ul class="dish__spec"><li data-ing="0"><i style="--c:#E7E4BC" aria-hidden="true"></i>Elderflower</li><li data-ing="1"><i style="--c:#B9CE55" aria-hidden="true"></i>Apples</li><li data-ing="2"><i style="--c:#D7D688" aria-hidden="true"></i>Pears</li><li data-ing="3"><i style="--c:#DDE7E4" aria-hidden="true"></i>Tonic / Soda</li></ul>
+            </div>
+          </li>
+        </ul>
+      </section>
+  </div>
+
+  <p class="sheet__note">Prices as printed on the bar's own sheet. Glass shapes follow their own <em>Short</em> / <em>Long</em> and <em>Highballs</em> / <em>Stirred</em> / <em>Shaken</em> groupings; band colours are illustrative, not a recipe.</p>
+</section>
+
+<!-- ══════════ 5. classics, by method ══════════ -->
+<section class="classics" id="classics">
+  <header class="sec-head sec-head--mid">
+    <p class="kicker mono">03 / TWENTY-TWO CLASSICS</p>
+    <h2 class="h2">Grouped by how<br />they are made</h2>
+  </header>
+  <div class="classics__grid">
+      <section class="method">
+        <header class="method__head">
+          <svg class="method__gl" viewBox="0 0 100 130" aria-hidden="true"><path d="M18 30 L23 118 Q23 124 30 124 L70 124 Q77 124 77 118 L82 30 Z"/></svg>
+          <div>
+            <h3 class="method__title">Highballs</h3>
+            <p class="method__price mono">3.000 kr.</p>
+          </div>
+        </header>
+        <ul class="method__list"><li>Tom Collins</li><li>Moscow Mule</li><li>Gin Fizz</li><li>Dark &amp; Stormy</li><li>Paloma</li></ul>
+      </section>
+      <section class="method">
+        <header class="method__head">
+          <svg class="method__gl" viewBox="0 0 100 130" aria-hidden="true"><path d="M20 56 L24 118 Q24 124 31 124 L69 124 Q76 124 76 118 L80 56 Z"/></svg>
+          <div>
+            <h3 class="method__title">Stirred</h3>
+            <p class="method__price mono">3.400 kr.</p>
+          </div>
+        </header>
+        <ul class="method__list"><li>French 75</li><li>Martini</li><li>Negroni</li><li>Old Fashioned</li><li>Boulevardier</li><li>Manhattan</li><li>Rosita</li><li>Sazerac</li></ul>
+      </section>
+      <section class="method">
+        <header class="method__head">
+          <svg class="method__gl" viewBox="0 0 100 130" aria-hidden="true"><path d="M14 34 Q14 78 46 84 L46 112 L30 118 L30 124 L70 124 L70 118 L54 112 L54 84 Q86 78 86 34 Z"/></svg>
+          <div>
+            <h3 class="method__title">Shaken</h3>
+            <p class="method__price mono">3.200 kr.</p>
+          </div>
+        </header>
+        <ul class="method__list"><li>Espresso Martini</li><li>Cosmopolitan</li><li>Basil Gimlet</li><li>Whiskey Sour</li><li>Jungle Bird</li><li>Daiquiri</li><li>Margarita</li><li>Sidecar</li><li>Pisco Sour</li></ul>
+      </section>
+  </div>
+</section>
+
+<!-- ══════════ 6. the paintings ══════════ -->
+<section class="paintings" id="paintings">
+  <header class="sec-head">
+    <p class="kicker mono">04 / ON THE WALLS</p>
+    <h2 class="h2">A Reykjavík<br /><em>that never existed</em></h2>
+    <p class="sec-head__note">Þrándur Þórarinsson, born in Akureyri in 1978, paints the way the old masters painted and puts the city in the frame: crowds, horses, statues, and faces you half recognise.</p>
+  </header>
+
+  <figure class="bleed bleed--wide" data-pour>
+    <img src="assets/img/room5.webp" alt="A long painted panel above the banquette showing a crowded green square in Reykjavík, with amber table lamps lit along the seating below." width="2000" height="1333" loading="lazy" decoding="async" />
+    <figcaption class="mono">PAINTED PANEL ABOVE THE BANQUETTE</figcaption>
+  </figure>
+  <figure class="bleed " data-pour>
+    <img src="assets/img/room4.webp" alt="A corner of the room with brown leather tub armchairs beneath a large dark painting of classical figures." width="2000" height="1333" loading="lazy" decoding="async" />
+    <figcaption class="mono">THE CORNER · LEATHER TUB CHAIRS UNDER THE DARK PANEL</figcaption>
+  </figure>
+</section>
+
+<!-- ══════════ 7. the bar crew ══════════ -->
+<section class="crew" id="crew">
+  <div class="crew__pin" id="crewPin">
+    <header class="crew__head">
+      <p class="kicker mono">05 / BEHIND THE BAR</p>
+      <h2 class="h2">The people who<br />actually make it</h2>
+      <p class="crew__note">This rail is built and empty on purpose. It holds eight portraits and a first name each, and nobody here is going to invent a bartender. Send the photographs and the names and it fills in an afternoon.</p>
+    </header>
+    <ul class="crew__track" id="crewTrack">
+        <li class="crew__card crew__card--empty">
+          <div class="crew__slot" aria-hidden="true"><span class="crew__slotn mono">01</span></div>
+          <div class="crew__body">
+            <h3>Bartender</h3>
+            <p class="crew__await mono">PORTRAIT + FIRST NAME TO COME</p>
+          </div>
+        </li>
+        <li class="crew__card crew__card--empty">
+          <div class="crew__slot" aria-hidden="true"><span class="crew__slotn mono">02</span></div>
+          <div class="crew__body">
+            <h3>Bartender</h3>
+            <p class="crew__await mono">PORTRAIT + FIRST NAME TO COME</p>
+          </div>
+        </li>
+        <li class="crew__card crew__card--empty">
+          <div class="crew__slot" aria-hidden="true"><span class="crew__slotn mono">03</span></div>
+          <div class="crew__body">
+            <h3>Bartender</h3>
+            <p class="crew__await mono">PORTRAIT + FIRST NAME TO COME</p>
+          </div>
+        </li>
+        <li class="crew__card crew__card--empty">
+          <div class="crew__slot" aria-hidden="true"><span class="crew__slotn mono">04</span></div>
+          <div class="crew__body">
+            <h3>Bar back</h3>
+            <p class="crew__await mono">PORTRAIT + FIRST NAME TO COME</p>
+          </div>
+        </li>
+        <li class="crew__card crew__card--empty">
+          <div class="crew__slot" aria-hidden="true"><span class="crew__slotn mono">05</span></div>
+          <div class="crew__body">
+            <h3>Bartender</h3>
+            <p class="crew__await mono">PORTRAIT + FIRST NAME TO COME</p>
+          </div>
+        </li>
+        <li class="crew__card crew__card--empty">
+          <div class="crew__slot" aria-hidden="true"><span class="crew__slotn mono">06</span></div>
+          <div class="crew__body">
+            <h3>Floor</h3>
+            <p class="crew__await mono">PORTRAIT + FIRST NAME TO COME</p>
+          </div>
+        </li>
+        <li class="crew__card crew__card--empty">
+          <div class="crew__slot" aria-hidden="true"><span class="crew__slotn mono">07</span></div>
+          <div class="crew__body">
+            <h3>Bartender</h3>
+            <p class="crew__await mono">PORTRAIT + FIRST NAME TO COME</p>
+          </div>
+        </li>
+        <li class="crew__card crew__card--empty">
+          <div class="crew__slot" aria-hidden="true"><span class="crew__slotn mono">08</span></div>
+          <div class="crew__body">
+            <h3>Bar manager</h3>
+            <p class="crew__await mono">PORTRAIT + FIRST NAME TO COME</p>
+          </div>
+        </li>
+    </ul>
+    <p class="crew__progress mono"><span id="crewCount">01</span> / 08</p>
+  </div>
+</section>
+
+<!-- ══════════ 8. wine and bubbles ══════════ -->
+<section class="cellar paper" id="cellar">
+  <header class="sec-head">
+    <p class="kicker mono">06 / WINE &amp; BUBBLES</p>
+    <h2 class="h2">The rest of<br />the list</h2>
+    <p class="sec-head__note">Everything the printed sheet carries, as text. Eleven spellings on the wine list have been corrected against the bar's own pages, where two of them contradict each other.</p>
+  </header>
+  <div class="cellar__grid">
+
+      <div class="cellar__col">
+        <h3 class="cellar__h">By the glass</h3>
+        <p class="cellar__sub mono">GLASS / BOTTLE</p>
+        <h4 class="cellar__cat">White</h4><ul class="cellar__list"><li class="cw"><span class="cw__n">Pizzolato</span><span class="cw__g">Pinot Grigio</span><span class="cw__r">Italy, Friuli-Venezia Giulia</span><span class="cw__rule" aria-hidden="true"></span><span class="cw__p mono">2.000 <span class="cw__slash">/</span> 9.500</span></li><li class="cw"><span class="cw__n">Michel Lynch</span><span class="cw__g">Sauvignon Blanc</span><span class="cw__r">France, Bordeaux</span><span class="cw__rule" aria-hidden="true"></span><span class="cw__p mono">2.300 <span class="cw__slash">/</span> 11.000</span></li><li class="cw"><span class="cw__n">Laroche Chablis</span><span class="cw__g">Chardonnay</span><span class="cw__r">France</span><span class="cw__rule" aria-hidden="true"></span><span class="cw__p mono">2.600 <span class="cw__slash">/</span> 12.500</span></li><li class="cw"><span class="cw__n">Pian del Griso</span><span class="cw__g">Pinot Grigio</span><span class="cw__r">Italy, Trentino-Alto Adige</span><span class="cw__rule" aria-hidden="true"></span><span class="cw__p mono">2.600 <span class="cw__slash">/</span> 12.500</span></li></ul>
+        <h4 class="cellar__cat">Red</h4><ul class="cellar__list"><li class="cw"><span class="cw__n">Cazes Côtes du Rhône Reserva</span><span class="cw__g">Syrah, Grenache, Mourvèdre</span><span class="cw__r">France, Rhône</span><span class="cw__rule" aria-hidden="true"></span><span class="cw__p mono">2.100 <span class="cw__slash">/</span> 10.000</span></li><li class="cw"><span class="cw__n">Verona Bolla</span><span class="cw__g">Rosso Blend</span><span class="cw__r">Italy, Veneto</span><span class="cw__rule" aria-hidden="true"></span><span class="cw__p mono">2.300 <span class="cw__slash">/</span> 11.000</span></li><li class="cw"><span class="cw__n">Ramon Bilbao</span><span class="cw__g">Garnacha</span><span class="cw__r">Spain</span><span class="cw__rule" aria-hidden="true"></span><span class="cw__p mono">2.500 <span class="cw__slash">/</span> 12.000</span></li><li class="cw"><span class="cw__n">Maison Champy</span><span class="cw__g">Pinot Noir</span><span class="cw__r">France, Burgundy</span><span class="cw__rule" aria-hidden="true"></span><span class="cw__p mono">2.800 <span class="cw__slash">/</span> 13.500</span></li></ul>
+        <h4 class="cellar__cat">Rosé</h4><ul class="cellar__list"><li class="cw"><span class="cw__n">Muga Rosado</span><span class="cw__g">Garnacha, Viura</span><span class="cw__r">Spain, Rioja</span><span class="cw__rule" aria-hidden="true"></span><span class="cw__p mono">2.000 <span class="cw__slash">/</span> 9.500</span></li></ul>
+        <h4 class="cellar__cat">Bubbles</h4><ul class="cellar__list"><li class="cw"><span class="cw__n">Pizzolato 0%</span><span class="cw__r">Italy, Veneto</span><span class="cw__rule" aria-hidden="true"></span><span class="cw__p mono">1.500</span></li><li class="cw"><span class="cw__n">Segura Viudas Reserva Brut Cava</span><span class="cw__r">Spain, Penedès</span><span class="cw__rule" aria-hidden="true"></span><span class="cw__p mono">1.900 <span class="cw__slash">/</span> 10.500</span></li><li class="cw"><span class="cw__n">Piccini Prosecco</span><span class="cw__r">Italy, Veneto</span><span class="cw__rule" aria-hidden="true"></span><span class="cw__p mono">1.900</span></li><li class="cw"><span class="cw__n">François Martenot Crémant de Bourgogne Brut</span><span class="cw__r">France, Bourgogne</span><span class="cw__rule" aria-hidden="true"></span><span class="cw__p mono">2.100</span></li><li class="cw"><span class="cw__n">Pol Roger</span><span class="cw__r">France, Champagne</span><span class="cw__rule" aria-hidden="true"></span><span class="cw__p mono">3.300 <span class="cw__slash">/</span> 19.000</span></li></ul>
+      </div>
+      <div class="cellar__col">
+        <h3 class="cellar__h">By the bottle</h3>
+        <p class="cellar__sub mono">BOTTLE</p>
+        <h4 class="cellar__cat">White</h4><ul class="cellar__list"><li class="cw"><span class="cw__n">Vietti Roero</span><span class="cw__g">Arneis</span><span class="cw__r">Italy, Piedmont</span><span class="cw__rule" aria-hidden="true"></span><span class="cw__p mono">12.000</span></li><li class="cw"><span class="cw__n">Casa Rojo El Gordo del Circo</span><span class="cw__g">Verdejo</span><span class="cw__r">Spain, Rueda</span><span class="cw__rule" aria-hidden="true"></span><span class="cw__p mono">11.500</span></li><li class="cw"><span class="cw__n">Louis Jadot Chablis Grand Cru</span><span class="cw__g">Chardonnay</span><span class="cw__r">France, Chablis</span><span class="cw__rule" aria-hidden="true"></span><span class="cw__p mono">21.000</span></li></ul>
+        <h4 class="cellar__cat">Red</h4><ul class="cellar__list"><li class="cw"><span class="cw__n">Amalaya Corte Único</span><span class="cw__g">Cabernet Franc, Malbec, Tannat</span><span class="cw__r">Argentina, Salta</span><span class="cw__rule" aria-hidden="true"></span><span class="cw__p mono">12.500</span></li><li class="cw"><span class="cw__n">Maison Champy</span><span class="cw__g">Pinot Noir</span><span class="cw__r">France, Burgundy</span><span class="cw__rule" aria-hidden="true"></span><span class="cw__p mono">14.500</span></li><li class="cw"><span class="cw__n">Enzo Bartoli Barolo</span><span class="cw__g">Nebbiolo</span><span class="cw__r">Italy, Piedmont</span><span class="cw__rule" aria-hidden="true"></span><span class="cw__p mono">15.500</span></li><li class="cw"><span class="cw__n">Viña Ardanza</span><span class="cw__g">Tempranillo, Garnacha</span><span class="cw__r">Spain, Rioja</span><span class="cw__rule" aria-hidden="true"></span><span class="cw__p mono">15.500</span></li><li class="cw"><span class="cw__n">Numanthia</span><span class="cw__g">Tinta de Toro</span><span class="cw__r">Spain, Toro</span><span class="cw__rule" aria-hidden="true"></span><span class="cw__p mono">19.500</span></li><li class="cw"><span class="cw__n">Penfold's Bin 28 Kalimna</span><span class="cw__g">Shiraz</span><span class="cw__r">South Australia</span><span class="cw__rule" aria-hidden="true"></span><span class="cw__p mono">16.500</span></li><li class="cw"><span class="cw__n">Beringer Private Reserve</span><span class="cw__g">Cabernet Sauvignon</span><span class="cw__r">California, Napa Valley</span><span class="cw__rule" aria-hidden="true"></span><span class="cw__p mono">45.000</span></li></ul>
+        <h4 class="cellar__cat">Rosé</h4><ul class="cellar__list"><li class="cw"><span class="cw__n">Muga Rosado</span><span class="cw__g">Garnacha, Viura</span><span class="cw__r">Spain, Rioja</span><span class="cw__rule" aria-hidden="true"></span><span class="cw__p mono">9.500</span></li><li class="cw"><span class="cw__n">Torre Mora Scalunaro Etna Rosato</span><span class="cw__g">Nerello Mascalese</span><span class="cw__r">Italy, Sicily</span><span class="cw__rule" aria-hidden="true"></span><span class="cw__p mono">11.000</span></li></ul>
+        <h4 class="cellar__cat">Bubbles</h4><ul class="cellar__list"><li class="cw"><span class="cw__n">Willm Crémant d'Alsace Rosé</span><span class="cw__r">France, Alsace</span><span class="cw__rule" aria-hidden="true"></span><span class="cw__p mono">12.000</span></li><li class="cw"><span class="cw__n">Crémant de Bourgogne</span><span class="cw__r">France, Bourgogne</span><span class="cw__rule" aria-hidden="true"></span><span class="cw__p mono">12.000</span></li><li class="cw"><span class="cw__n">Moët &amp; Chandon Rosé</span><span class="cw__r">France, Champagne</span><span class="cw__rule" aria-hidden="true"></span><span class="cw__p mono">20.500</span></li><li class="cw"><span class="cw__n">Vollereaux Brut Blanc de Blancs</span><span class="cw__r">France, Champagne</span><span class="cw__rule" aria-hidden="true"></span><span class="cw__p mono">21.000</span></li><li class="cw"><span class="cw__n">Dom Pérignon</span><span class="cw__r">France, Champagne</span><span class="cw__rule" aria-hidden="true"></span><span class="cw__p mono">60.000</span></li></ul>
+      </div>
+  </div>
+</section>
+
+<!-- ══════════ 9. happy hour ══════════ -->
+<section class="rent" id="happy">
+  <div class="rent__band">
+    <p class="rent__eyebrow mono">EVERY DAY OF THE WEEK</p>
+    <p class="rent__big">HAPPY HOUR<br />16 – 19</p>
+    <p class="rent__sub">Not just weekdays. Not just early in the week. Every day, from four until seven.</p>
+  </div>
+</section>
+
+<!-- ══════════ 10. visit ══════════ -->
+<section class="visit" id="visit">
+  <header class="sec-head">
+    <p class="kicker mono">07 / VISIT</p>
+    <h2 class="h2">On Austurstræti,<br />facing the square</h2>
+  </header>
+
+  <div class="visit__grid">
+    <div class="visit__col">
+      <h3 class="visit__h">Opening hours</h3>
+      <ul class="hrs"><li><span class="hrs__d mono">Mon</span><span class="hrs__t mono">14:00 – 01:00</span></li><li><span class="hrs__d mono">Tue</span><span class="hrs__t mono">14:00 – 01:00</span></li><li><span class="hrs__d mono">Wed</span><span class="hrs__t mono">14:00 – 01:00</span></li><li><span class="hrs__d mono">Thu</span><span class="hrs__t mono">14:00 – 01:00</span></li><li class="hrs--late"><span class="hrs__d mono">Fri</span><span class="hrs__t mono">12:00 – 03:00</span></li><li class="hrs--late"><span class="hrs__d mono">Sat</span><span class="hrs__t mono">12:00 – 03:00</span></li><li><span class="hrs__d mono">Sun</span><span class="hrs__t mono">12:00 – 23:00</span></li></ul>
+      <p class="visit__hh mono">HAPPY HOUR 16:00 – 19:00, EVERY DAY</p>
+    </div>
+    <div class="visit__col">
+      <h3 class="visit__h">Where</h3>
+      <p class="visit__addr">Austurstræti 12A<br />101 Reykjavík</p>
+      <p class="visit__blurb">Ground floor, on the Austurvöllur side, with tables out on the pavement when the weather allows.</p>
+      <a class="btn btn--main" href="mailto:gilligogg@gilligogg.com">gilligogg@gilligogg.com</a>
+      <a class="btn btn--ghost" href="https://www.instagram.com/gilligogg" rel="noopener">@gilligogg</a>
+    </div>
+  </div>
+
+  <figure class="bleed " data-pour>
+    <img src="assets/img/room3.webp" alt="The Austurstræti frontage, with bentwood chairs and round tables set out on the pavement terrace in front of the open doors." width="2000" height="1334" loading="lazy" decoding="async" />
+    <figcaption class="mono">THE TERRACE · AUSTURSTRÆTI</figcaption>
+  </figure>
+  <figure class="bleed " data-pour>
+    <img src="assets/img/room2.webp" alt="Looking down the room toward the street doors, the bar on the right, brass foot rail and gold stools, herringbone parquet underfoot." width="2000" height="1334" loading="lazy" decoding="async" />
+    <figcaption class="mono">LOOKING BACK TOWARD THE DOORS</figcaption>
+  </figure>
+</section>
+
+<!-- ══════════ 11. closer ══════════ -->
+<section class="closer">
+  <img class="closer__logo" src="assets/wordmark.svg" alt="Gilligogg" width="1071" height="191" />
+  <p class="closer__line">Everything that is good, and hello, and hurrah, and bravo.</p>
+  <a class="btn btn--main" href="#drinks">See the list</a>
+</section>
+
+<footer class="foot">
+  <p class="mono">Austurstræti 12A &middot; 101 Reykjavík</p>
+  <p class="mono"><a href="mailto:gilligogg@gilligogg.com">gilligogg@gilligogg.com</a></p>
+  <p class="mono foot__note">Concept redesign by SNDR. Not affiliated with the bar. Drinks, prices and hours transcribed from the bar's own published menu and website.</p>
+</footer>
+
+</main>
+
+<script src="assets/vendor/lenis.min.js" defer></script>
+<script src="assets/vendor/gsap.min.js" defer></script>
+<script src="assets/vendor/ScrollTrigger.min.js" defer></script>
+<script src="app.js" defer></script>
+</body>
+</html>
