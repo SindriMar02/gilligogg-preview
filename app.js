@@ -149,7 +149,7 @@ const SCRUB_MODE = MOTION && DESKTOP;
      under the gate's identical copy, so the gate can dissolve straight off it.
      All it does is settle from a hair oversized, which is what makes the room
      read as arriving rather than cutting. */
-  gsap.set('#heroMark', { scale: 1.045 });
+  gsap.set('.hero__h1', { scale: 1.045 });
   gsap.set('.hero__tag', { y: 14, opacity: 0 });
   // A still needs a deeper travel than the film did to read as motion at all —
   // single-digit drift over a pinned 170% reads as "stale", per the ledger.
@@ -161,14 +161,9 @@ const SCRUB_MODE = MOTION && DESKTOP;
   /* The entrance is held until the opening scene hands over, so it plays
      for the viewer instead of behind a full-screen loader, and so nothing
      re-renders it half-finished on the refresh that follows. */
-  const intro = gsap.timeline({
-    paused: true,
-    // Re-measure once the entrance has actually landed, so every scrub tween
-    // that shares an element with it re-reads the real resting value.
-    onComplete: () => ScrollTrigger.refresh()
-  });
+  const intro = gsap.timeline({ paused: true });
   intro
-    .to('#heroMark',     { scale: 1, duration: 1.6, ease: 'expo.out' }, 0)
+    .to('.hero__h1',     { scale: 1, duration: 1.6, ease: 'expo.out' }, 0)
     .to('.hero__tag',    { y: 0, opacity: 1, duration: 0.9, ease: EASE }, 0.18)
     .to('.hero__eyebrow', { y: 0, opacity: 1, duration: 0.7, ease: EASE }, 0.24)
     .to('#heroBase',  { y: 0, opacity: 1, duration: 0.8, ease: EASE }, 0.42)
@@ -179,24 +174,31 @@ const SCRUB_MODE = MOTION && DESKTOP;
 
   /* ── the signature: pinned hero, scroll pushes into the room ── */
   if (SCRUB_MODE) {
-    /* invalidateOnRefresh matters here specifically because the entrance and
-       this scrub share elements (#heroMark, .hero__tag, #heroBase). The
-       handover refreshes BEFORE releasing the entrance — it has to, so the pin
-       measures correctly — which means every scrub tween would otherwise
-       record the entrance's START state as its resting value, and scrolling
-       back up would leave the wordmark stuck at scale 1.045 instead of 1.
-       Refreshing again once the entrance lands re-reads the true rest. */
+    /* The entrance and this scrub must never touch the SAME PROPERTY on the
+       same element. The handover has to refresh before releasing the entrance
+       (so the pin measures right), which means any property they share gets
+       the entrance's START state recorded as its resting value — the wordmark
+       came back from a scroll stuck at scale 1.045. gsap records start values
+       per property, so splitting them is enough: the entrance owns the h1's
+       SCALE, the scrub owns the h1's OPACITY and the mark's own scale.
+       (invalidateOnRefresh is NOT the fix here: it makes gsap re-read
+       --film-s, which is an unregistered custom property, as 0.) */
     gsap.timeline({
       scrollTrigger: {
         trigger: '#heropin', start: 'top top', end: '+=170%',
-        pin: true, scrub: 0.55, invalidateOnRefresh: true
+        pin: true, scrub: 0.55
       }
     })
+      /* fromTo, not to: every tween below shares an element with the entrance,
+         and a bare `to` reverses to whatever value happened to be recorded when
+         the handover refreshed — which is the entrance's START, not its rest.
+         #heroBase came back stuck at opacity 0 that way. Stating the rest value
+         explicitly makes reversal independent of when the start was captured. */
       // scrolling walks INTO the room: the mark grows past you and clears
-      .to('#heroMark',   { scale: 1.34, opacity: 0, ease: 'none', duration: 0.78, immediateRender: false }, 0.04)
-      .to('.hero__tag',  { y: -34, opacity: 0, ease: 'none', duration: 0.4, immediateRender: false }, 0)
-      .to('#heroBase',   { y: 40, opacity: 0, ease: 'none', duration: 0.45, immediateRender: false }, 0)
-      .to('#heroHint',   { opacity: 0, ease: 'none', duration: 0.2, immediateRender: false }, 0)
+      .fromTo('#heroMark', { scale: 1 },            { scale: 1.34, ease: 'none', duration: 0.78, immediateRender: false }, 0.04)
+      .fromTo('.hero__h1', { opacity: 1 },          { opacity: 0, ease: 'none', duration: 0.62, immediateRender: false }, 0.12)
+      .fromTo('#heroBase', { y: 0, opacity: 1 },    { y: 40, opacity: 0, ease: 'none', duration: 0.45, immediateRender: false }, 0)
+      .fromTo('#heroHint', { opacity: 1 },          { opacity: 0, ease: 'none', duration: 0.2, immediateRender: false }, 0)
       .to('.hero__film', { '--film-s': 1.30, ease: 'none', duration: 1 }, 0)
       .to('.hero__veil', { opacity: 0.62, ease: 'none', duration: 0.3 }, 0.7);
   } else {
